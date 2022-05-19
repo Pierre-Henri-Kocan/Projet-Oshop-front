@@ -30,7 +30,7 @@
   // à l'URL (réécrite) demandée, et on stocke le tout dans $match (un tableau associatif)
   // Ceci remplace les if ... else qu'on utilisait précédemment ;)
   $matchingRouteInfos = $router->match();
-  d( $matchingRouteInfos );
+  // d( $matchingRouteInfos );
 
   // A partir de là, j'ai dans $match toutes les infos necessaire
   // à l'affichage de la page qui correspond à l'URL demandée
@@ -57,7 +57,7 @@
   // On instancie notre controller
   $controller = new MainController();
 
-  d( get_defined_vars() );
+  // d( get_defined_vars() );
 
   // On appelle la méthode dont le nom se trouve dans $methodToCall sur MainController
   // A l'execution, ça donnera, par exemple $controller->home() ou $controller->category()
