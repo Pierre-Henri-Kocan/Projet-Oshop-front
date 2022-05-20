@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mx-0">
             <div class="col-md-6">
-                <div class="card border-0 text-white text-center"><img src="./assets/images/categ5.jpeg" alt="Card image"
+                <div class="card border-0 text-white text-center"><img src="<?= $_SERVER['BASE_URI'] ?>/assets/images/categ5.jpeg" alt="Card image"
                         class="card-img">
                     <div class="card-img-overlay d-flex align-items-center">
                         <div class="w-100 py-3">
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-0 text-white text-center"><img src="./assets/images/categ2.jpeg" alt="Card image"
+                <div class="card border-0 text-white text-center"><img src="<?= $_SERVER['BASE_URI'] ?>/assets/images/categ2.jpeg" alt="Card image"
                         class="card-img">
                     <div class="card-img-overlay d-flex align-items-center">
                         <div class="w-100 py-3">
@@ -27,7 +27,7 @@
         <div class="row mx-0">
 
             <div class="col-lg-4">
-                <div class="card border-0 text-center text-white"><img src="./assets/images/categ4.jpeg" alt="Card image"
+                <div class="card border-0 text-center text-white"><img src="<?= $_SERVER['BASE_URI'] ?>/assets/images/categ4.jpeg" alt="Card image"
                         class="card-img">
                     <div class="card-img-overlay d-flex align-items-center">
                         <div class="w-100">
@@ -40,7 +40,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="card border-0 text-center text-dark">
-                    <img src="./assets/images/categ1.jpeg" alt="Card image" class="card-img">
+                    <img src="<?= $_SERVER['BASE_URI'] ?>/assets/images/categ1.jpeg" alt="Card image" class="card-img">
                     <div class="card-img-overlay d-flex align-items-center">
                         <div class="w-100">
                             <h2 class="display-4 mb-4">Détente</h2>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card border-0 text-center text-white"><img src="./assets/images/categ3.jpeg" alt="Card image"
+                <div class="card border-0 text-center text-white"><img src="<?= $_SERVER['BASE_URI'] ?>/assets/images/categ3.jpeg" alt="Card image"
                         class="card-img">
                     <div class="card-img-overlay d-flex align-items-center">
                         <div class="w-100">

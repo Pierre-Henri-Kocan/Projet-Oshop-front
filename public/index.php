@@ -4,7 +4,14 @@
   require_once __DIR__ . '/../vendor/autoload.php';
 
   // On inclut nos classes 
+  require_once __DIR__ . '/../app/Database.php';
   require_once __DIR__ . '/../app/Controllers/MainController.php';
+  require_once __DIR__ . '/../app/Controllers/CatalogController.php';
+
+  require_once __DIR__ . '/../app/Models/Type.php';
+  require_once __DIR__ . '/../app/Models/Brand.php';
+  require_once __DIR__ . '/../app/Models/Product.php';
+  require_once __DIR__ . '/../app/Models/Category.php';
   
   //==============================================
   // ROUTER
@@ -20,11 +27,47 @@
   // Je "map" mes routes => je les enregistre auprès d'AltoRouter
   //   Param #1 : Méthode utilisée par la route, en S5 : toujours "GET"
   //   Param #2 : URL (uniquement la partie variable) correspondant à la route
-  //   Param #3 : Info que l'on pourra récupérer plus tard pour le Dispatcher
+  //   Param #3 : Info que l'on pourra récupérer plus tard pour le Dispatcher dans $matchingRouteInfos['target']
+  //              On y met un tableau qui contient deux info, le nom du controller et de la méthode à call
   //   Param #4 : Nom unique de la route, par convention : nom du controller + nom de la méthode
-  $router->map( "GET", "/", "home", "main-home" );
-  $router->map( "GET", "/catalog/category/[i:category_id]", "category", "main-category" );
-  // Etc pour chaque route...
+  
+  //--------------------------------------------
+  // Routes Main
+  //--------------------------------------------
+
+  $router->map( "GET", "/", [ 
+    "method"     => "home", 
+    "controller" => "MainController" 
+  ], "main-home" );
+
+  $router->map( "GET", "/legal",  [ 
+    "method"     => "legal", 
+    "controller" => "MainController" 
+  ],  "main-legal" );
+
+  //--------------------------------------------
+  // Routes Catalog
+  //--------------------------------------------
+
+  $router->map( "GET", "/catalog/category/[i:category_id]", [ 
+    "method"     => "category", 
+    "controller" => "CatalogController" 
+  ], "catalog-category" );
+
+  $router->map( "GET", "/catalog/brand/[i:brand_id]", [ 
+    "method"     => "brand", 
+    "controller" => "CatalogController" 
+  ],"catalog-brand" );
+  
+  $router->map( "GET", "/catalog/type/[i:type_id]", [ 
+    "method"     => "type", 
+    "controller" => "CatalogController" 
+  ], "catalog-type");
+  
+  $router->map( "GET", "/catalog/product/[i:product_id]", [ 
+    "method"     => "product", 
+    "controller" => "CatalogController" 
+  ], "catalog-product" );
 
   // On demande a AltoRouter de trouver la route qui correspond
   // à l'URL (réécrite) demandée, et on stocke le tout dans $match (un tableau associatif)
@@ -51,13 +94,15 @@
 
   // Dans ce match, et plus précisément à sa clé "target", je retrouve
   // le 3e paramètre fourni à ->map() lors de la création de la route
-  // Ici, il s'agit du nom de la méthode à executer sur MainController
-  $methodToCall = $matchingRouteInfos['target'];
+  // Ici, il s'agit du tableau qui contient deux clés :
+  //  'method'     => le nom de la méthode à exécuter
+  //  'controller' => le nom du controller à instancier
+  $controllerToInstantiate = $matchingRouteInfos['target']['controller'];
+  $methodToCall            = $matchingRouteInfos['target']['method'];
 
-  // On instancie notre controller
-  $controller = new MainController();
-
-  // d( get_defined_vars() );
+  // On instancie notre controller dynamiquement
+  // a partir du nom qui se trouve dans la variable $controllerToInstantiate
+  $controller = new $controllerToInstantiate();
 
   // On appelle la méthode dont le nom se trouve dans $methodToCall sur MainController
   // A l'execution, ça donnera, par exemple $controller->home() ou $controller->category()

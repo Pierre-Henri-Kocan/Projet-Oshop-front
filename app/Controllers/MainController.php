@@ -7,13 +7,17 @@
       $this->show( "home" );
     }
 
-    public function notice()
+    public function legal()
     {
-      $this->show( "notice" );
+      // Pour l'instant on a pas encore fait le template
+      // $this->show( "legal" );
+
+      echo "<h1>Mentions Légales</h1>";
     }
 
     private function show( $viewName, $viewData = [] )
     {
+      //d( $viewData );
 
       require_once __DIR__ . '/../views/header.tpl.php';
       require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
