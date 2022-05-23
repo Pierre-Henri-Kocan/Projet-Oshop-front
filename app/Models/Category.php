@@ -18,80 +18,35 @@
     // Constructeur
     //========================================
 
-    /**
-     * @param array $columnsPofpof
-     */
-    public function __construct( $columnsPofpof = [] )
-    {
-      foreach( $columnsPofpof as $property => $value )
-      {
-        // Je parcours chaque case du tableau (généralement récupéré de la BDD)
-        // et je renseigne la propriété dont le nom correspond à la clé
-        // par la valeur correspondante
-        $this->$property = $value;
-      }
-    }
-
     //========================================
     // Methods
     //========================================
 
     /**
-     * Méthode qui retourne un objet Brand à partir de son $id en BDD
+     * Méthode qui retourne un objet Category à partir de son $id en BDD
      * @param int $id 
-     * @return self Une instance de Brand qui correspond à la marque
+     * @return self Une instance de Category qui correspond à la marque
      */
     public function find( $id )
     {
-      // J'appelle la méthode getPDO() de la classe Database
-      // Oui on ne l'instancie pas, oui le symbole :: est bizarre, on verra ça en S06 ;)
-      // Juste a savoir : ça nous retourne l'objet PDO qui représente la connexion BDD
       $pdo = Database::getPDO();
-
       $sql = "SELECT * FROM `category` WHERE `id` = $id";
-      $pdoStatement = $pdo->query( $sql );
-
-
-      // On récupère le tout souf forme de tableau associatif
-      // Sauf que, problème, nous on veut un objet Brand !
-      // Donc deux solutions :
-       
-      //--- Solution 1 ---------------------------------------------------
-      //   On instancie un nouvel objet Brand qu'on renseigne avec les infos d
-      //   du tableau associatif $result qu'on récupère comme d'habitude
-      //   On a pour celà créé un constructeur qui va lire les infos du tableau récupéré
-      //   depuis la BDD et renseigner chaque propriété qui correspond
-
-      // $result = $pdoStatement->fetch( PDO::FETCH_ASSOC );
-      // $brandObject = new Brand( $result );
-      // d( $brandObject );
-      // return $brandObject;
-
-      //--- Solution 2 ---------------------------------------------------
-      //   On demande a PDO de faire automatiquement la solution 1 à notre place !
-      //   https://www.php.net/manual/fr/pdostatement.fetchobject.php
-
+      $pdoStatement = $pdo->query( $sql ); 
       $categoryObject = $pdoStatement->fetchObject( "Category" );
       return $categoryObject;
     }
-
     
     /**
-     * Méthode qui retourne tout les objets Brand en BDD
-     * @return self[] Un tableau d'objets Brand
+     * Méthode qui retourne tout les objets Category en BDD
+     * @return self[] Un tableau d'objets Category
      */
     public function findAll()
     {
       $pdo = Database::getPDO();
-
       $sql = "SELECT * FROM `category`";
-      $pdoStatement = $pdo->query( $sql );      
-
-      // Comme pour la solution 2 de fetch, on peut récupérer directement des
-      // objets dans le tableau retourné par PDO
-      $categoryObject = $pdoStatement->fetchAll( PDO::FETCH_CLASS, "Category" );
-      d( $categoryObject );
-      return $categoryObject;
+      $pdoStatement = $pdo->query( $sql );
+      $categoryObjects = $pdoStatement->fetchAll( PDO::FETCH_CLASS, "Category" );
+      return $categoryObjects;
     }
 
     //========================================
@@ -124,31 +79,65 @@
         $this->name = $name;
 
         return $this;
-    }
+    }    /**
+    * Get the value of subtitle
+    */ 
+   public function getSubtitle()
+   {
+       return $this->subtitle;
+   }
 
-    /**
-     * Get the value of created_at
-     */ 
-    public function subtitle()
-    {
-        return $this->subtitle;
-    }
+   /**
+    * Set the value of subtitle
+    *
+    * @return  self
+    */ 
+   public function setSubtitle($subtitle)
+   {
+       $this->subtitle = $subtitle;
 
-    /**
-     * Get the value of created_at
-     */ 
-    public function picture()
-    {
-        return $this->picture;
-    }
+       return $this;
+   }
 
-    /**
-     * Get the value of created_at
-     */ 
-    public function home_order()
-    {
-        return $this->home_order;
-    }
+   /**
+    * Get the value of picture
+    */ 
+   public function getPicture()
+   {
+       return $this->picture;
+   }
+
+   /**
+    * Set the value of picture
+    *
+    * @return  self
+    */ 
+   public function setPicture($picture)
+   {
+       $this->picture = $picture;
+
+       return $this;
+   }
+
+   /**
+    * Get the value of home_order
+    */ 
+   public function getHome_order()
+   {
+       return $this->home_order;
+   }
+
+   /**
+    * Set the value of home_order
+    *
+    * @return  self
+    */ 
+   public function setHome_order($home_order)
+   {
+       $this->home_order = $home_order;
+
+       return $this;
+   }
 
     /**
      * Get the value of created_at
