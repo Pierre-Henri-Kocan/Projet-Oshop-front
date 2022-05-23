@@ -1,10 +1,26 @@
 <?php
 
-  class MainController
+  class MainController extends CoreController
   {
     public function home()
     {
-      $this->show( "home" );
+      $brandModel = new Brand();
+      $allBrands = $brandModel->findAll();
+
+      $typeModel = new Type();
+      $allTypes = $typeModel->findAll();
+
+      $categoryModel = new Category();
+      $allCategories = $categoryModel->findAll();
+
+      // d( $allBrands );
+      // d( $allTypes );
+
+      $this->show( "home", [
+        "allBrands" => $allBrands,
+        "allTypes"  => $allTypes,
+        "allCategories" => $allCategories,
+      ] );
     }
 
     public function legal()
@@ -17,7 +33,10 @@
 
     private function show( $viewName, $viewData = [] )
     {
-      //d( $viewData );
+      // On peut utiliser get_defined_vars() pour avoir une liste
+      // des variables qui existent actuellement là où on se trouve
+    
+      //  d( get_defined_vars() );
 
       require_once __DIR__ . '/../views/header.tpl.php';
       require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';

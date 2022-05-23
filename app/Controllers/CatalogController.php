@@ -1,6 +1,6 @@
 <?php
 
-  class CatalogController
+  class CatalogController extends CoreController
   {
     public function category( $url_params )
     {
@@ -43,7 +43,7 @@
 
     private function show( $viewName, $viewurl_params = [] )
     {
-      d( $viewurl_params );
+     // d( $viewurl_params );
 
       require_once __DIR__ . '/../views/header.tpl.php';
       require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
