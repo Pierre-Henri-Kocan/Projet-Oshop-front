@@ -1,5 +1,12 @@
 <?php
 
+  namespace App\Controllers;
+
+  use App\Models\Brand;
+  use App\Models\Product;
+  use App\Models\Type;
+  use App\Models\Category;
+
   class CatalogController extends CoreController
   {
     public function category( $url_params )
@@ -39,14 +46,5 @@
     public function product( $url_params )
     {
       echo "Page du produit #".$url_params['product_id'];
-    }
-
-    private function show( $viewName, $viewurl_params = [] )
-    {
-     // d( $viewurl_params );
-
-      require_once __DIR__ . '/../views/header.tpl.php';
-      require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
-      require_once __DIR__ . '/../views/footer.tpl.php';
     }
   }

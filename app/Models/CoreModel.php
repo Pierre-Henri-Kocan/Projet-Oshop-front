@@ -1,5 +1,10 @@
 <?php
 
+  namespace App\Models;
+
+  use App\Database;
+  use PDO;
+
   class CoreModel
   {
     //========================================
@@ -10,6 +15,9 @@
     protected $name;
     protected $created_at;
     protected $updated_at;
+
+    // Pour stocker le nom de la table du model utilisé
+    protected $table = "";
 
     //========================================
     // Constructeur
@@ -36,7 +44,12 @@
       $class_name = get_class( $this );
 
       // Je met le nom de la classe en minuscule pour retrouver le nom de la table
-      $table_name = strtolower( $class_name );
+      // EDIT : ça ne fonctionne plus a cause du namespace !
+      // $table_name = strtolower( $class_name );
+
+      // On va donc préférer, pour l'instant, récupérer la valeur d'une propriété
+      // qui sera différente dans chaque model et qui stockera le nom de la table
+      $table_name = $this->table;
 
       $sql = "SELECT * FROM `$table_name` WHERE `id` = $id";
       $pdoStatement = $pdo->query( $sql );
@@ -77,7 +90,12 @@
       $class_name = get_class( $this );
 
       // Je met le nom de la classe en minuscule pour retrouver le nom de la table
-      $table_name = strtolower( $class_name );
+      // EDIT : ça ne fonctionne plus a cause du namespace !
+      // $table_name = strtolower( $class_name );
+
+      // On va donc préférer, pour l'instant, récupérer la valeur d'une propriété
+      // qui sera différente dans chaque model et qui stockera le nom de la table
+      $table_name = $this->table;
 
       // Requête SQL et execution
       $sql = "SELECT * FROM `$table_name`";
@@ -86,7 +104,6 @@
       // Comme pour la solution 2 de fetch, on peut récupérer directement des
       // objets dans le tableau retourné par PDO
       $objects = $pdoStatement->fetchAll( PDO::FETCH_CLASS, $class_name );
-     // d( $objects );
       return $objects;
     }
     

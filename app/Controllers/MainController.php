@@ -1,5 +1,12 @@
 <?php
 
+  namespace App\Controllers;
+
+  use App\Models\Brand;
+  use App\Models\Product;
+  use App\Models\Type;
+  use App\Models\Category;
+
   class MainController extends CoreController
   {
     public function home()
@@ -17,9 +24,9 @@
       // d( $allTypes );
 
       $this->show( "home", [
-        "allBrands" => $allBrands,
-        "allTypes"  => $allTypes,
-        "allCategories" => $allCategories,
+        "allBrands"      => $allBrands,
+        "allTypes"       => $allTypes,
+        "allCategories"  => $allCategories,
       ] );
     }
 
@@ -29,17 +36,5 @@
       // $this->show( "legal" );
 
       echo "<h1>Mentions Légales</h1>";
-    }
-
-    private function show( $viewName, $viewData = [] )
-    {
-      // On peut utiliser get_defined_vars() pour avoir une liste
-      // des variables qui existent actuellement là où on se trouve
-    
-      //  d( get_defined_vars() );
-
-      require_once __DIR__ . '/../views/header.tpl.php';
-      require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
-      require_once __DIR__ . '/../views/footer.tpl.php';
     }
   }

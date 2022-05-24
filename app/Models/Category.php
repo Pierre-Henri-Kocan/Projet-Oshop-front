@@ -1,7 +1,11 @@
 <?php
 
+  namespace App\Models;
+
   class Category extends CoreModel
   {
+    protected $table = "category";
+
     //========================================
     // Properties
     //========================================

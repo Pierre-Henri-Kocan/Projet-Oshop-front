@@ -2,18 +2,7 @@
 
   // On inclut l'autochargement des dépendances de Composer
   require_once __DIR__ . '/../vendor/autoload.php';
-
-  // On inclut nos classes 
-  require_once __DIR__ . '/../app/Database.php';
-  require_once __DIR__ . '/../app/Controllers/MainController.php';
-  require_once __DIR__ . '/../app/Controllers/CatalogController.php';
-
-  require_once __DIR__ . '/../app/Models/CoreModel.php';
-  require_once __DIR__ . '/../app/Models/Type.php';
-  require_once __DIR__ . '/../app/Models/Brand.php';
-  require_once __DIR__ . '/../app/Models/Product.php';
-  require_once __DIR__ . '/../app/Models/Category.php';
-  
+ 
   //==============================================
   // ROUTER
   //==============================================
@@ -38,36 +27,36 @@
 
   $router->map( "GET", "/", [ 
     "method"     => "home", 
-    "controller" => "MainController" 
+    "controller" => "App\Controllers\MainController" 
   ], "main-home" );
 
   $router->map( "GET", "/legal",  [ 
     "method"     => "legal", 
-    "controller" => "MainController" 
+    "controller" => "App\Controllers\MainController" 
   ],  "main-legal" );
 
   //--------------------------------------------
   // Routes Catalog
   //--------------------------------------------
 
-  $router->map( "GET", "/catalog/category/[i:category_id]", [ 
+  $router->map( "GET", "/catalog/categories/[i:category_id]", [ 
     "method"     => "category", 
-    "controller" => "CatalogController" 
+    "controller" => "App\Controllers\CatalogController" 
   ], "catalog-category" );
 
   $router->map( "GET", "/catalog/brand/[i:brand_id]", [ 
     "method"     => "brand", 
-    "controller" => "CatalogController" 
+    "controller" => "App\Controllers\CatalogController" 
   ],"catalog-brand" );
   
   $router->map( "GET", "/catalog/type/[i:type_id]", [ 
     "method"     => "type", 
-    "controller" => "CatalogController" 
+    "controller" => "App\Controllers\CatalogController" 
   ], "catalog-type");
   
   $router->map( "GET", "/catalog/product/[i:product_id]", [ 
     "method"     => "product", 
-    "controller" => "CatalogController" 
+    "controller" => "App\Controllers\CatalogController" 
   ], "catalog-product" );
 
   // On demande a AltoRouter de trouver la route qui correspond

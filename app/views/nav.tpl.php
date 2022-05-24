@@ -14,14 +14,16 @@
               <div class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Catégories</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <?php foreach( $viewData['allCategories'] as $categoryObject ) : ?>
+
+                  <?php foreach( $viewData['allCategories'] as $categoryObject ) : ?>
                     <a 
                       class="dropdown-item" 
-                      href="<?= $_SERVER['BASE_URI'] ?>/catalog/category/<?= $categoryObject->getId(); ?>"
+                      href="<?= $router->generate( "catalog-category", [ "category_id" => $categoryObject->getId() ] ) ?>"
                     >
                       <?= $categoryObject->getName(); ?>
                     </a>
                   <?php endforeach; ?>
+
                 </div>
               </div>
             </li>
@@ -46,7 +48,8 @@
               <div class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Marques</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <?php foreach( $viewData['allBrands'] as $brandObject ) : ?>
+
+                  <?php foreach( $viewData['allBrands'] as $brandObject ) : ?>
                     <a 
                       class="dropdown-item" 
                       href="<?= $_SERVER['BASE_URI'] ?>/catalog/brand/<?= $brandObject->getId(); ?>"
@@ -54,6 +57,7 @@
                       <?= $brandObject->getName(); ?>
                     </a>
                   <?php endforeach; ?>
+                  
                 </div>
               </div>
             </li>

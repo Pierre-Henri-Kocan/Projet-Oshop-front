@@ -1,7 +1,11 @@
 <?php
 
+  namespace App\Models;
+
   class Product extends CoreModel
   {
+    protected $table = "product";
+
     //========================================
     // Properties
     //========================================
