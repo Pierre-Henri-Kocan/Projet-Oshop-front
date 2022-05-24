@@ -63,7 +63,7 @@
   // à l'URL (réécrite) demandée, et on stocke le tout dans $match (un tableau associatif)
   // Ceci remplace les if ... else qu'on utilisait précédemment ;)
   $matchingRouteInfos = $router->match();
-  // d( $matchingRouteInfos );
+   var_dump( $matchingRouteInfos );
 
   // A partir de là, j'ai dans $match toutes les infos necessaire
   // à l'affichage de la page qui correspond à l'URL demandée

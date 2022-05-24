@@ -9,11 +9,7 @@
 
   class CatalogController extends CoreController
   {
-    public function category( $url_params )
-    {
-      echo "Page de la catégorie #".$url_params['category_id'];
-    }
-
+  
     public function type( $url_params )
     {
       echo "Page du type #".$url_params['type_id'];
@@ -46,5 +42,22 @@
     public function product( $url_params )
     {
       echo "Page du produit #".$url_params['product_id'];
+      
     }
+
+    public function category($url_params )
+    {
+        $categoryModel = new Category();
+        $categoryObject = $categoryModel->find($url_params['category_id']);
+        $allCategories = $categoryModel->findAll();
+
+        var_dump($categoryObject);
+
+        $this->show("products_list", 
+                    [ "allCategories" => $allCategories,
+                      "categoryObject" => $categoryObject,
+                    ]
+                  );
+    }
+
   }
