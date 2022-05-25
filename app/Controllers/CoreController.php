@@ -2,6 +2,8 @@
 
   namespace App\Controllers;
 
+use App\Models\Type;
+
   class CoreController
   {
     protected function show( $viewName, $viewData = [] )
@@ -10,6 +12,10 @@
       // https://www.php.net/manual/fr/language.variables.scope.php#language.variables.scope.global
       global $router;
 
+      $typeObject = new Type;
+      $typeListByName = $typeObject->findAll();
+      
+      $baseUri = $_SERVER['BASE_URI'];
       // On peut utiliser get_defined_vars() pour avoir une liste
       // des variables qui existent actuellement là où on se trouve
       //d( get_defined_vars() );

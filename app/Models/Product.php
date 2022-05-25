@@ -2,6 +2,9 @@
 
   namespace App\Models;
 
+  use App\Database;
+  use PDO;
+
   class Product extends CoreModel
   {
     protected $table = "product";
@@ -156,4 +159,18 @@
     {
         return $this->type_id;
     }
+
+    public function findProductByCategory($categoryId){
+      $pdo = Database::getPDO();
+      $class_name = get_class( $this );
+      $table_name = $this->table;
+
+      $sql = "SELECT * FROM `$table_name` WHERE `category_id` = $categoryId";
+      $pdoStatement = $pdo->query( $sql );
+      $productList = $pdoStatement->fetchAll(PDO::FETCH_CLASS,__CLASS__ );
+      return $productList;
+
+      
+    }
+
   }

@@ -57,12 +57,18 @@
         $allCategories = $categoryModel->findAll();
         $categoryObject = $categoryModel->find($url_params['category_id']);
 
+        $categoryId = $url_params['category_id'];
+
+        $productObject = new Product();
+        $productList = $productObject->findProductByCategory($categoryId);
+
         $this->show("products_list", 
                     [ 
                       "allBrands"      => $allBrands,
                       "allTypes"       => $allTypes,
                       "allCategories"  => $allCategories,
                       "categoryObject" => $categoryObject,
+                      "productList"    => $productList,
                     ]
                   );
     }
