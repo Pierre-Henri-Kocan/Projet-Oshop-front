@@ -8,7 +8,7 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a href="index.html" class="nav-link active">Accueil</a>
+              <a href="<?= $router->generate( "main-home")?>" class="nav-link active">Accueil</a>
             </li>
             <li class="nav-item">
               <div class="dropdown">

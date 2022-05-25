@@ -47,14 +47,21 @@
 
     public function category($url_params )
     {
-        $categoryModel = new Category();
-        $categoryObject = $categoryModel->find($url_params['category_id']);
-        $allCategories = $categoryModel->findAll();
+        $brandModel = new Brand();
+        $allBrands = $brandModel->findAll();
 
-        var_dump($categoryObject);
+        $typeModel = new Type();
+        $allTypes = $typeModel->findAll();
+
+        $categoryModel = new Category();
+        $allCategories = $categoryModel->findAll();
+        $categoryObject = $categoryModel->find($url_params['category_id']);
 
         $this->show("products_list", 
-                    [ "allCategories" => $allCategories,
+                    [ 
+                      "allBrands"      => $allBrands,
+                      "allTypes"       => $allTypes,
+                      "allCategories"  => $allCategories,
                       "categoryObject" => $categoryObject,
                     ]
                   );
