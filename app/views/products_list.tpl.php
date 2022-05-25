@@ -10,8 +10,7 @@
         <h1 class="hero-heading"><?=$viewData['categoryObject']->getName()?></h1>
         <div class="row">
           <div class="col-xl-8 offset-xl-2">
-            <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt.</p>
+            <p class="lead text-muted"><?=$viewData['categoryObject']->getSubtitle()?> </p>
           </div>
         </div>
       </div>
@@ -40,7 +39,6 @@
       <div class="row">
 
         <?php
-          var_dump($typeListByName);    
           foreach($viewData['productList'] as $product) :
         ?>
           <!-- product-->
@@ -56,7 +54,7 @@
               </div>
               <div class="py-2">
                   
-                <p class="text-muted text-sm mb-1">type</p>
+                <p class="text-muted text-sm mb-1"><?= $typeListByName[$product->getType_id()] ?></p>
                 <h3 class="h6 text-uppercase mb-1"><a href="product.html" class="text-dark"><?=$product->getName()?></a></h3><span class="text-muted"><?=$product->getPrice()?></span>
               </div>
             </div>

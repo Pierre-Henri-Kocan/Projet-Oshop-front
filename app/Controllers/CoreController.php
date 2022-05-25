@@ -13,7 +13,7 @@ use App\Models\Type;
       global $router;
 
       $typeObject = new Type;
-      $typeListByName = $typeObject->findAll();
+      $typeListByName = $typeObject->findAllByName();
       
       $baseUri = $_SERVER['BASE_URI'];
       // On peut utiliser get_defined_vars() pour avoir une liste
