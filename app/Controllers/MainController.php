@@ -11,22 +11,11 @@
   {
     public function home()
     {
-      $brandModel = new Brand();
-      $allBrands = $brandModel->findAll();
-
-      $typeModel = new Type();
-      $allTypes = $typeModel->findAll();
-
-      $categoryModel = new Category();
-      $allCategories = $categoryModel->findAll();
-
-      // d( $allBrands );
-      // d( $allTypes );
+      $categoryModel  = new Category();
+      $homeCategories = $categoryModel->findForHome();
 
       $this->show( "home", [
-        "allBrands"      => $allBrands,
-        "allTypes"       => $allTypes,
-        "allCategories"  => $allCategories,
+        "homeCategories"  => $homeCategories,
       ] );
     }
 

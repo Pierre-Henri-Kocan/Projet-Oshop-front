@@ -2,8 +2,8 @@
 
   namespace App\Models;
 
-  use App\Database;
-  use PDO;
+use App\Database;
+use PDO;
 
   class Product extends CoreModel
   {
@@ -31,6 +31,70 @@
     //========================================
     // Methods
     //========================================
+
+    // Solution 1 : faire des findAllBy pour chaque entité
+
+    /**
+     * Méthode qui retourne tout les objets Product en BDD
+     * @return self[] Un tableau d'objets Product
+     */
+    public function findAllByBrand( $brand_id )
+    {
+      $pdo = Database::getPDO();
+      $class_name = get_class( $this );
+      $table_name = $this->table;
+
+      // Requête SQL et execution
+      $sql = "SELECT * FROM `$table_name` WHERE `brand_id` = $brand_id";
+      $pdoStatement = $pdo->query( $sql );      
+      
+      return $pdoStatement->fetchAll( PDO::FETCH_CLASS, $class_name );
+    }
+    
+    public function findAllByCategory( $category_id )
+    {
+      $pdo = Database::getPDO();
+      $class_name = get_class( $this );
+      $table_name = $this->table;
+
+      // Requête SQL et execution
+      $sql = "SELECT * FROM `$table_name` WHERE `category_id` = $category_id";
+      $pdoStatement = $pdo->query( $sql );      
+      
+      return $pdoStatement->fetchAll( PDO::FETCH_CLASS, $class_name );
+    }
+    
+    public function findAllByType( $type_id )
+    {
+      $pdo = Database::getPDO();
+      $class_name = get_class( $this );
+      $table_name = $this->table;
+
+      // Requête SQL et execution
+      $sql = "SELECT * FROM `$table_name` WHERE `type_id` = $type_id";
+      $pdoStatement = $pdo->query( $sql );      
+      
+      return $pdoStatement->fetchAll( PDO::FETCH_CLASS, $class_name );
+    }
+
+    // Fin solution 1 ----------------------------------------------------------
+
+    // Solution 2 : Je fais une méthode factorisée avec 
+    // un paramètre supplémentaire pour le filtre
+    //  ex $productModel->findAllBy( 'brand_id', $url_params['brand_id'] )
+    //  ex $productModel->findAllBy( 'name', "pofpof" )
+    public function findAllBy( $field, $id )
+    {
+      $pdo = Database::getPDO();
+      $class_name = get_class( $this );
+      $table_name = $this->table;
+
+      // Requête SQL et execution
+      $sql = "SELECT * FROM `$table_name` WHERE `$field` = $id";
+      $pdoStatement = $pdo->query( $sql );      
+      
+      return $pdoStatement->fetchAll( PDO::FETCH_CLASS, $class_name );
+    }
 
     //========================================
     // Getters & Setters

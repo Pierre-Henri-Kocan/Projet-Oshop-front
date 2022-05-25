@@ -39,7 +39,7 @@
   // Routes Catalog
   //--------------------------------------------
 
-  $router->map( "GET", "/catalog/categories/[i:category_id]", [ 
+  $router->map( "GET", "/catalog/category/[i:category_id]", [ 
     "method"     => "category", 
     "controller" => "App\Controllers\CatalogController" 
   ], "catalog-category" );

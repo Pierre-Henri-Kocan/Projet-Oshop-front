@@ -2,6 +2,9 @@
 
   namespace App\Models;
 
+  use App\Database;
+  use PDO;
+
   class Category extends CoreModel
   {
     protected $table = "category";
@@ -23,6 +26,23 @@
     //========================================
     // Methods
     //========================================
+
+    /**
+     * Méthode pour récupérer les Category de la page d'accueil
+     * @return self[] Un tableau d'objets Category
+    */ 
+    public function findForHome()
+    {
+      $pdo = Database::getPDO();
+      $class_name = get_class( $this );
+      $table_name = $this->table;
+
+      // Requête SQL et execution
+      $sql = "SELECT * FROM `$table_name` WHERE `home_order` > 0 ORDER BY `home_order` LIMIT 5";
+      $pdoStatement = $pdo->query( $sql );      
+
+      return $pdoStatement->fetchAll( PDO::FETCH_CLASS, $class_name );
+    }
 
     //========================================
     // Getters & Setters
