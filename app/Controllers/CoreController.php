@@ -26,7 +26,7 @@ use App\Models\Type;
 
       // On peut utiliser get_defined_vars() pour avoir une liste
       // des variables qui existent actuellement là où on se trouve
-      d( get_defined_vars() );
+      //d( get_defined_vars() );
 
       require_once __DIR__ . '/../views/header.tpl.php';
       require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';

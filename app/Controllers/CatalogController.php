@@ -11,7 +11,7 @@
   {
     public function category( $url_params )
     {
-      echo "Page de la catégorie #".$url_params['category_id'];
+      //echo "Page de la catégorie #".$url_params['category_id'];
       
       $productModel = new Product();
       $productList = $productModel->findAllBy( "category_id", $url_params['category_id'] );
@@ -27,7 +27,7 @@
 
     public function type( $url_params )
     {
-      echo "Page du type #".$url_params['type_id'];
+      // echo "Page du type #".$url_params['type_id'];
       
       $productModel = new Product();
       $productList = $productModel->findAllBy( "type_id", $url_params['type_id'] );
@@ -43,7 +43,7 @@
 
     public function brand( $url_params )
     {
-      echo "Page de la marque #".$url_params['brand_id'];
+      // echo "Page de la marque #".$url_params['brand_id'];
       
       $productModel = new Product();
       $productList = $productModel->findAllBy( "brand_id", $url_params['brand_id'] );
